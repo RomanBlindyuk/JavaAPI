@@ -1,6 +1,5 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -10,16 +9,17 @@ public class HelloWorldTest {
 
     @Test
     public void testRestAssured(){
-        Map<String, String> params = new HashMap<>();
-        params.put("name", "John");
-
+        Map<String, Object> body = new HashMap<>();
+        body.put("param1","value1");
+        body.put("param2","value2");
         Response response = RestAssured
                 .given()
-                .queryParams(params)
-                .get("https://playground.learnqa.ru/api/hello")
+                .body(body)
+                .post("https://playground.learnqa.ru/api/check_type")
                 .andReturn();
-        response.prettyPrint();
-        System.out.println("Response code: " + response.getStatusCode());
+        response.print();
+
+
     }
 
 }
